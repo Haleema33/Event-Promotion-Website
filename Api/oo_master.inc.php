@@ -80,54 +80,48 @@ class MasterPage
     
     private function setMasterContent()
     {
+        $tmasterpage = <<<FORM
+        <div id="wrapper">
+            <header>
+                <h1>Club Event Promotion Site</h1>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="Event.php">Events</a></li>
+                    <li><a href="Artist.php">Artists</a></li>
+                    <li><a href="Profile.php">Profile</a></li>
+                    <li class="nav-gap"></li>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="signup.php">Sign up</a></li>
+                </ul>	
+            </nav>
         
-       
-        
-        $tmasterpage    = <<<FORM
-
-<div id="wrapper">
-<header>
-<h1>Club Event Promotion Site</h1>
-
-</header>
-<nav>
-			<ul>
-				<li><a href="index.php">Home</a></li>
-				<li><a href="Event.php">Events</a></li>
-				<li><a href="Artist.php">Artists</a></li>
-				<li><a href="Profile.php">Profile</a></li>
-				<li class="nav-gap"></li>
-				<li><a href="login.php">Login</a></li>
-				<li><a href="signup.php">SignUp</a></li>
-			</ul>	
-		</nav>
-	
-	
-	
-	
-     
-   
-	<div id= "wrapper">
-        {$this->_dynamic_1}
-		{$this->_dynamic_2}
-         {$this->_dynamic_3}
-    </div>
-
-  
-	</div>
-	
-		
-    <footer>
-    <ul>
-        <li><a href="about.php">About us</a></li>
-        <li class="footer-gap"></li>
-        <li><a href="contact.php">Contact us</a></li>
-        <li>Copyright &copy; 2024</li>
-    </ul>
-</footer>
-FORM;
+            <!-- Dynamic Content -->
+            {dynamic1}
+            {dynamic2}
+            {dynamic3}
+            <!-- End of Dynamic Content -->
+            
+            <footer>
+                <ul>
+                    <li><a href="about.php">About us</a></li>
+                    <li class="footer-gap"></li>
+                    <li><a href="contact.php">Contact us</a></li>
+                    <li>Copyright &copy; 2024</li>
+                </ul>
+            </footer>	
+        </div>
+    FORM;
+    
+        // Replace placeholders with actual dynamic content
+        $tmasterpage = str_replace("{dynamic1}", $this->_dynamic_1, $tmasterpage);
+        $tmasterpage = str_replace("{dynamic2}", $this->_dynamic_2, $tmasterpage);
+        $tmasterpage = str_replace("{dynamic3}", $this->_dynamic_3, $tmasterpage);
+    
         $this->_htmlpage->setBodyContent($tmasterpage); 
     }
+    
 }
 
 ?>

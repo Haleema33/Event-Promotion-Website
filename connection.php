@@ -1,21 +1,20 @@
-<?php 
-// Start or resume the session
-session_start();
+<?php
+$host = 'localhost';  // Usually 'localhost'
+$dbname = 'event_promotion_site';     // Your database name
+$user = 'root';       // Your database username
+$pass = '';           // Your database password, default is empty in XAMPP
 
-// Database connection parameters
-$db_host = 'localhost';
-$db_username = 'your_username';
-$db_password = 'your_password';
-$db_name = 'your_database';
-
-// Create database connection
-$db_connection = new mysqli($db_host, $db_username, $db_password, $db_name);
-
-// Check database connection
-if ($db_connection->connect_error) {
-    die("Connection failed: " . $db_connection->connect_error);
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    // Set the PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(PDOException $e) {
+    die("ERROR: Could not connect. " . $e->getMessage());
 }
 
-// Set session variables
-$_SESSION; 
+$mysqli = new mysqli('localhost', 'root', '', 'event_promotion_site');
+if ($mysqli->connect_error) {
+    die('Connection failed: ' . $mysqli->connect_error);
+}
+return $mysqli;  // Ensure $mysqli is returned to be used in other scripts
 ?>
