@@ -12,6 +12,9 @@ function createPage()
            
     <h2>This is About Us Page.</h2>
     
+
+
+    
     PAGE;
     return $tcontent;
 }

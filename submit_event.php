@@ -1,5 +1,33 @@
 <?php
 // submit_event.php
+include("connection.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve data from form
+    $eventName = $_POST['eventName'];
+    $eventDetails = $_POST['eventDetails'];
+    $eventDate = $_POST['eventDate'];
+    $eventLocation = $_POST['eventLocation'];
+    $eventCategory = $_POST['eventCategory'];
+    $artistDetails = $_POST['artistDetails'];
+    $artistLink = $_POST['artistLink'];
+
+    // Prepare SQL query
+    $sql = "INSERT INTO events (name, details, date_time, location, category, artist_details,artist_link) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $pdo->prepare($sql);
+
+    try {
+        // Execute the prepared statement
+        $stmt->execute([$eventName, $eventDetails, $eventDate, $eventLocation, $eventCategory, $artistDetails, $artistLink]);
+        echo "Event added successfully!";
+    } catch (PDOException $e) {
+        // Handle SQL execution errors
+        echo "Error: " . $e->getMessage();
+    }
+} else {
+    // Not a POST request
+    echo "Invalid request.";
+}
 
 // Check if it's an AJAX request
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {

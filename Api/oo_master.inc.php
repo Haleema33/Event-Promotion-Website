@@ -61,12 +61,11 @@ class MasterPage
     //-------PRIVATE FUNCTIONS-----------------------------------    
     private function setPageDefaults()
     {
-        $this->_htmlpage->setMediaDirectory("css","js","fonts","img","data");
-        $this->addCSSFile("site.css");
-       
-        $this->addScriptFile("jquery-2.2.4.js");
-        $this->addScriptFile("bootstrap.js");
-        $this->addScriptFile("holder.js");        
+        $this->_htmlpage->setMediaDirectory("css", "js", "fonts", "img", "data");
+        $this->addCSSFile("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"); // Include Bootstrap CSS
+        $this->addScriptFile("https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"); // Include Bootstrap Bundle JS which includes Popper
+    
+        $this->addCSSFile("site.css"); // Your site's specific stylesheet
     }
     
     private function setDynamicDefaults()
@@ -81,37 +80,52 @@ class MasterPage
     private function setMasterContent()
     {
         $tmasterpage = <<<FORM
-        <div id="wrapper">
-            <header>
-                <h1>Club Event Promotion Site</h1>
-            </header>
-            <nav>
-                <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="Event.php">Events</a></li>
-                    <li><a href="Artist.php">Artists</a></li>
-                    <li><a href="Profile.php">Profile</a></li>
-                    <li class="nav-gap"></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="signup.php">Sign up</a></li>
-                </ul>	
-            </nav>
+        <div id="wrapper" class="container">
+        <header class="bg-light p-3 mb-3 border-bottom">
+            <h1>Club Event Promotion Site</h1>
+        </header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Event.php">Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Artist.php">Artists</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Profile.php">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="signup.php">Sign up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <!-- Dynamic Content -->
+        <div class="row">
+            <div class="col-md-12">
+                {dynamic1}
+            </div>
+            <div class="col-md-12">
+                {dynamic2}
+            </div>
+            <div class="col-md-12">
+                {dynamic3}
+            </div>
+        </div>
+        <!-- End of Dynamic Content -->
         
-            <!-- Dynamic Content -->
-            {dynamic1}
-            {dynamic2}
-            {dynamic3}
-            <!-- End of Dynamic Content -->
-            
-            <footer>
-                <ul>
+        <footer class="footer mt-4 py-3 bg-light">
+            <div class="container">
+                <ul class="list-unstyled d-flex justify-content-between">
                     <li><a href="about.php">About us</a></li>
-                    <li class="footer-gap"></li>
                     <li><a href="contact.php">Contact us</a></li>
                     <li>Copyright &copy; 2024</li>
                 </ul>
-            </footer>	
-        </div>
+            </div>
+        </footer>	
+    </div>
     FORM;
     
         // Replace placeholders with actual dynamic content
