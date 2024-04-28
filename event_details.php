@@ -4,8 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // ----INCLUDE APIS------------------------------------
-// Include our Website API
-include("api/api.inc.php");
+include("api/api.inc.php");  // Include our Website API
 include("connection.php");  // Assume this file correctly sets up $mysqli
 
 // ----PAGE GENERATION LOGIC---------------------------
@@ -30,7 +29,7 @@ function createPage($mysqli) {
     $stmt->bind_result($id, $name, $details, $date_time, $location, $category, $artist_details, $artist_link);
 
     $tcontent = "";
-    if ($stmt->fetch()) {
+    if ($stmt->fetch()) {  // Only one fetch call is necessary
         $tcontent = <<<HTML
         <div style="font-family: Arial, sans-serif; margin: 20px; padding: 20px; border-radius: 8px; background: #f9f9f9; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
             <h1 style="color: #333;">Event Details</h1>
@@ -41,12 +40,15 @@ function createPage($mysqli) {
             <p><strong>Category:</strong> {$category}</p>
             <p><strong>Artist Details:</strong> {$artist_details}</p>
             <p><strong>Artist Link:</strong> <a href="{$artist_link}" target="_blank">Visit Artist</a></p>
+            <form action="delete_event.php" method="POST" style="margin-top: 20px;">
+                <input type="hidden" name="event_id" value="{$id}">
+                <button type="submit" style="padding: 10px 20px; color: white; background-color: red; border: none; border-radius: 5px; cursor: pointer;" onclick="return confirm('Are you sure you want to delete this event? This action cannot be undone.');">Delete Event</button>
+            </form>
         </div>
 HTML;
     } else {
         $tcontent = "<p>No event found with ID {$event_id}.</p>";
     }
-    
     $stmt->close();
     return $tcontent;
 }
@@ -55,7 +57,6 @@ HTML;
 $tpagecontent = createPage($mysqli); // Pass $mysqli to the function
 
 // ----BUILD OUR HTML PAGE----------------------------
-// Create an instance of your page class
 $tindexpage = new MasterPage("Home Page");
 $tindexpage->setDynamic1($tpagecontent);
 $tindexpage->renderPage();

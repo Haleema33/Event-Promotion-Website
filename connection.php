@@ -1,4 +1,6 @@
 <?php
+
+
 $host = 'localhost';  // Usually 'localhost'
 $dbname = 'event_promotion_site';     // Your database name
 $user = 'root';       // Your database username
@@ -27,5 +29,6 @@ $conn = $mysqli;
 
 // Return array of connections if needed; otherwise, just use as global variables in included files
 return ['pdo' => $pdo, 'mysqli' => $mysqli];
+
 
 ?>

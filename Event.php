@@ -28,10 +28,10 @@ $pastQuery = "SELECT e.id, e.name, e.date_time, e.artist_details, e.category FRO
 $upcomingResult = $mysqli->query($upcomingQuery);
 $pastResult = $mysqli->query($pastQuery);
 
-// Start building the HTML for events display
+// Start building the HTML for Upcoming event display
 $html = <<<HTML
 <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-    <div style="width: 100%; padding: 20px; background-color: #f0f0f0;">
+    <div style="width: 100%; padding: 20px; background-color:#e0e0e0;">
         <h2>Upcoming Events</h2>
         <div style="display: flex; flex-direction: column; justify-content: start;">
 HTML;

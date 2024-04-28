@@ -3,6 +3,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();  // Start the session at the very beginning
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 include 'connection.php';  // Include your DB connection
 include("api/api.inc.php");  // Include your Website API
 

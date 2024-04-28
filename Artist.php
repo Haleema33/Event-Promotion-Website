@@ -8,8 +8,9 @@ include("connection.php");  // Include the database connection
 function createPage()
 {
     $tcontent = <<<PAGE
+   
     <h2>Add New Artist</h2>
-    <form id="artistForm" style="max-width: 500px; margin: 20px auto; padding: 20px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); background: #fff;">
+    <form id="artistForm" method="POST" enctype="multipart/form-data" style="max-width: 500px; margin: 20px auto; padding: 20px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); background: #fff;">
         <div style="margin-bottom: 10px;">
             <label for="name" style="display: block; margin-bottom: 5px;">Name:</label>
             <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
@@ -29,12 +30,11 @@ function createPage()
         <input type="submit" value="Add Artist" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">
     </form>
     <div id="response" style="max-width: 500px; margin: 20px auto; padding: 10px; background-color: #f4f4f4; border-radius: 8px;"></div>
-    
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-    $(document).ready(function(){
-        $('#artistForm').submit(function(event){
+    $(document).ready(function() {
+        $('#artistForm').submit(function(event) {
             event.preventDefault();
             var formData = new FormData(this);
             $.ajax({
@@ -42,7 +42,19 @@ function createPage()
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    $('#response').html(data);
+                    var response = JSON.parse(data);
+                    if (response.success) {
+                        var artistHtml = "<li class='artist-card'>" +
+                            "<div class='artist-img'><img src='uploads/" + response.picture + "' alt='Artist Image'></div>" +
+                            "<div class='artist-info'>" +
+                            "<strong>Name:</strong> " + response.name + "<br>" +
+                            "<strong>Bio:</strong> " + response.bio + "<br>" +
+                            "<strong>Social Media:</strong> " + response.social + "<br>" +
+                            "</div>" +
+                            "</li>";
+                        $('.artist-list').append(artistHtml);
+                    }
+                    $('#response').html(response.message);
                 },
                 cache: false,
                 contentType: false,
@@ -51,6 +63,7 @@ function createPage()
         });
     });
     </script>
+    
     
     PAGE;
     return $tcontent;
