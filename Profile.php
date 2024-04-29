@@ -32,7 +32,7 @@ function createPage($username)
 
     <div class="profile-container">
         <h1 class="profile-header">Welcome, $username!</h1>
-        <p>This is your profile page. More interactive features can be added here.</p>
+        <p>This is your profile page. More interactive features will be added here soon.</p>
     </div>
     
 PAGE;

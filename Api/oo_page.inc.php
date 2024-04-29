@@ -219,7 +219,7 @@ META;
         $thtml = "";
         if(!empty($this->_head_favicon))
         {
-            $tfaviconpath = $this->_dir;        
+            $tfaviconpath = $this->_dir_img;        
             $thtml = <<<FAVICON
 <link href="{$tfaviconpath}"rel="icon" type="image/x-icon" />
 FAVICON;

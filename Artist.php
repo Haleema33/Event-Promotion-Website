@@ -1,14 +1,18 @@
 <?php
+
 // ----INCLUDE APIS------------------------------------
 // Include our Website API
 include("api/api.inc.php");
 include("connection.php");  // Include the database connection
 
+
+
 // ----PAGE GENERATION LOGIC---------------------------
 function createPage()
 {
+
+    // HTML content for logged-in users
     $tcontent = <<<PAGE
-   
     <h2>Add New Artist</h2>
     <form id="artistForm" method="POST" enctype="multipart/form-data" style="max-width: 500px; margin: 20px auto; padding: 20px; border-radius: 8px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); background: #fff;">
         <div style="margin-bottom: 10px;">
@@ -63,9 +67,8 @@ function createPage()
         });
     });
     </script>
-    
-    
     PAGE;
+    
     return $tcontent;
 }
 

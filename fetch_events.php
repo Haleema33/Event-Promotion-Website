@@ -1,6 +1,9 @@
 <?php
 
 include("connection.php");  // Ensure your database connection is correctly set up.
+$field = getParam('field');
+$value = getParam('value');
+
 error_log("Received field: $field with value: $value");
 error_log("Field: $field, Value: $value");
 
@@ -8,9 +11,6 @@ error_log("Field: $field, Value: $value");
 function getParam($param) {
     return isset($_GET[$param]) ? $_GET[$param] : null;
 }
-
-$field = getParam('field');
-$value = getParam('value');
 
 // Define the function to filter events based on a specified field and value
 function filterEvents($mysqli, $field, $value) {
