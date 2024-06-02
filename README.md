@@ -53,7 +53,7 @@ This Event Promotion Website is a web application designed to help users manage 
 
 5. **Run the Project:**
    - Place the project folder in the `htdocs` directory of your XAMPP installation.
-   - Access the project by navigating to `http://localhost/4122COMP/event-promotion-website` in your web browser.
+   - Access the project by navigating to `http://localhost/event-promotion-website` in your web browser.
 
 ### Usage
 - **User Registration and Login:**
